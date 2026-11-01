@@ -64,6 +64,17 @@ func good(xs []int) []int { return append(xs, 1) }
 	}
 }
 
+func TestSprintfQuery(t *testing.T) {
+	hits := matchSource(t, sprintfQuery{}, `
+import ("database/sql"; "fmt")
+func bad(db *sql.DB, id string) { db.Query(fmt.Sprintf("select * from t where id=%s", id)) }
+func good(db *sql.DB, id string) { db.Query("select * from t where id=$1", id) }
+`)
+	if len(hits) != 1 || hits[0].Func != "bad" {
+		t.Fatalf("want 1 finding in bad, got %+v", hits)
+	}
+}
+
 func TestRegistryNotEmpty(t *testing.T) {
 	if len(Registry()) == 0 {
 		t.Fatal("no matchers registered")
