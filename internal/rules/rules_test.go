@@ -54,6 +54,16 @@ func good(paths []string) {
 	}
 }
 
+func TestDiscardedAppend(t *testing.T) {
+	hits := matchSource(t, discardedAppend{}, `
+func bad(xs []int) { append(xs, 1) }
+func good(xs []int) []int { return append(xs, 1) }
+`)
+	if len(hits) != 1 || hits[0].Func != "bad" {
+		t.Fatalf("want 1 finding in bad, got %+v", hits)
+	}
+}
+
 func TestRegistryNotEmpty(t *testing.T) {
 	if len(Registry()) == 0 {
 		t.Fatal("no matchers registered")
