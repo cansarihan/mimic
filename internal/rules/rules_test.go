@@ -86,6 +86,17 @@ func good(mu *sync.Mutex) { mu.Lock(); defer mu.Unlock() }
 	}
 }
 
+func TestRandSecret(t *testing.T) {
+	hits := matchSource(t, randSecret{}, `
+import "math/rand"
+func generateToken() int { return rand.Intn(1000000) }
+func rollDice() int { return rand.Intn(6) }
+`)
+	if len(hits) != 1 || hits[0].Func != "generateToken" {
+		t.Fatalf("want 1 finding in generateToken, got %+v", hits)
+	}
+}
+
 func TestRegistryNotEmpty(t *testing.T) {
 	if len(Registry()) == 0 {
 		t.Fatal("no matchers registered")
