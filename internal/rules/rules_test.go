@@ -75,6 +75,17 @@ func good(db *sql.DB, id string) { db.Query("select * from t where id=$1", id) }
 	}
 }
 
+func TestLockWithoutUnlock(t *testing.T) {
+	hits := matchSource(t, lockWithoutUnlock{}, `
+import "sync"
+func bad(mu *sync.Mutex) { mu.Lock(); _ = 1 }
+func good(mu *sync.Mutex) { mu.Lock(); defer mu.Unlock() }
+`)
+	if len(hits) != 1 || hits[0].Func != "bad" {
+		t.Fatalf("want 1 finding in bad, got %+v", hits)
+	}
+}
+
 func TestRegistryNotEmpty(t *testing.T) {
 	if len(Registry()) == 0 {
 		t.Fatal("no matchers registered")
