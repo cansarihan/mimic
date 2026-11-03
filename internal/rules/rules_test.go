@@ -97,6 +97,17 @@ func rollDice() int { return rand.Intn(6) }
 	}
 }
 
+func TestSwallowedError(t *testing.T) {
+	hits := matchSource(t, swallowedError{}, `
+import "errors"
+func bad() { err := errors.New("x"); if err != nil { } }
+func good() error { err := errors.New("x"); if err != nil { return err }; return nil }
+`)
+	if len(hits) != 1 || hits[0].Func != "bad" {
+		t.Fatalf("want 1 finding in bad, got %+v", hits)
+	}
+}
+
 func TestRegistryNotEmpty(t *testing.T) {
 	if len(Registry()) == 0 {
 		t.Fatal("no matchers registered")
