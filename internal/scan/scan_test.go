@@ -27,7 +27,7 @@ func leak(paths []string) {
 		_ = f
 	}
 }
-func lost(xs []int) { append(xs, 1) }
+func lost(xs []int) { _ = append(xs, 1) }
 `)
 	report, err := Rules(dir, rules.Registry())
 	if err != nil {
