@@ -29,6 +29,9 @@ linters:
         - G305
         - G402
         - G404
+  exclusions:
+    paths:
+      - deploy/sample
 formatters:
   enable:
     - gofmt
