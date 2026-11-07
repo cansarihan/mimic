@@ -29,6 +29,10 @@ func run() error {
 	switch os.Args[1] {
 	case "rules":
 		return runRules(os.Args[2:])
+	case "like":
+		return runLike(os.Args[2:])
+	case "list":
+		return runList(os.Args[2:])
 	case "version":
 		fmt.Printf("mimic %s (commit %s, built %s)\n", version, commit, date)
 		return nil
