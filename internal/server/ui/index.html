@@ -1,1 +1,89 @@
-<!doctype html><title>mimic</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mimic</title>
+  <link rel="icon" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <svg class="glyph" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true">
+        <circle cx="24" cy="32" r="12" fill="none" stroke="#a78bfa" stroke-width="3"/>
+        <circle cx="40" cy="32" r="12" fill="none" stroke="#e879f9" stroke-width="3" opacity="0.8"/>
+      </svg>
+      <div><h1>mimic</h1><p class="sub">variant analysis</p></div>
+    </div>
+    <nav>
+      <button class="nav active" data-page="overview"><span class="ico">◼</span> Overview</button>
+      <button class="nav" data-page="findings"><span class="ico">⚑</span> Findings</button>
+      <button class="nav" data-page="rules"><span class="ico">▤</span> Rules</button>
+      <button class="nav" data-page="siblings"><span class="ico">◐</span> Siblings</button>
+      <button class="nav" data-page="about"><span class="ico">◇</span> About</button>
+    </nav>
+    <div class="side-foot" id="side-foot">—</div>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <div class="crumb" id="crumb">Overview</div>
+      <div class="target" id="target">—</div>
+    </header>
+
+    <section class="page" id="page-overview">
+      <div class="tiles">
+        <div class="tile"><b id="t-functions">0</b><span>functions</span></div>
+        <div class="tile err"><b id="t-findings">0</b><span>findings</span></div>
+        <div class="tile"><b id="t-rules">0</b><span>rules</span></div>
+        <div class="tile"><b id="t-errors">0</b><span>errors</span></div>
+        <div class="tile"><b id="t-warnings">0</b><span>warnings</span></div>
+      </div>
+      <div class="cols">
+        <div class="card">
+          <div class="card-h">Findings by rule</div>
+          <div id="by-rule" class="bars"></div>
+        </div>
+        <div class="card">
+          <div class="card-h">Recent findings</div>
+          <ol id="recent" class="mini-list"></ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="page hidden" id="page-findings">
+      <div class="toolbar">
+        <select id="sev-filter"><option value="">all severities</option><option value="error">error</option><option value="warning">warning</option></select>
+        <span id="findings-count" class="muted"></span>
+      </div>
+      <table class="grid"><thead><tr><th>Severity</th><th>Rule</th><th>Function</th><th>Location</th><th>Message</th></tr></thead><tbody id="findings-body"></tbody></table>
+    </section>
+
+    <section class="page hidden" id="page-rules">
+      <div id="rules-cards" class="rule-grid"></div>
+    </section>
+
+    <section class="page hidden" id="page-siblings">
+      <div class="toolbar">
+        <select id="func-select"></select>
+        <label class="thr">min <input type="range" id="min" min="30" max="95" value="60"><span id="min-val">60%</span></label>
+      </div>
+      <div class="siblings-split">
+        <canvas id="constellation"></canvas>
+        <ol id="sibling-list" class="mini-list"></ol>
+      </div>
+    </section>
+
+    <section class="page hidden" id="page-about">
+      <div class="card prose">
+        <div class="card-h">What is mimic</div>
+        <p>Mimic finds the variants of a known bug. It runs a set of structural rules over your Go source, and it ranks the functions that structurally resemble a reference you choose — so a bug fixed in one place leads you to its copy-paste siblings.</p>
+        <p>It reads source, not types, so it runs on any Go that parses. The rules need no build.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
