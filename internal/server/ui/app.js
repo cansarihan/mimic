@@ -45,8 +45,33 @@ async function loadOverview() {
     '<li class="muted">nothing to show</li>';
 }
 
+async function loadFindings() {
+  if (!findingsCache) findingsCache = await api("/api/v1/findings");
+  renderFindings();
+}
+
+function renderFindings() {
+  const sev = $("sev-filter").value;
+  const rows = (findingsCache.findings || []).filter((f) => !sev || f.severity === sev);
+  $("findings-count").textContent = rows.length + " finding(s)";
+  $("findings-body").innerHTML = rows.map((f) =>
+    '<tr><td><span class="sev ' + f.severity + '">' + f.severity + '</span></td>' +
+    '<td><span class="tag">' + esc(f.rule) + '</span></td>' +
+    '<td>' + esc(f.func) + '</td>' +
+    '<td class="muted">' + esc(base(f.file)) + ':' + f.line + '</td>' +
+    '<td>' + esc(f.message) + '</td></tr>').join("") ||
+    '<tr><td colspan="5" class="muted" style="padding:20px;text-align:center">no findings</td></tr>';
+}
+
+async function loadRules() {
+  const rules = await api("/api/v1/rules");
+  $("rules-cards").innerHTML = rules.map((r) =>
+    '<div class="rule-card"><h3>' + esc(r.name) + '</h3><p>' + esc(r.describe) + '</p></div>').join("");
+}
+
 function init() {
   document.querySelectorAll(".nav").forEach((b) => b.addEventListener("click", () => route(b.dataset.page)));
+  $("sev-filter").addEventListener("change", renderFindings);
   loadOverview();
 }
 
