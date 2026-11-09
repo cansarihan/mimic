@@ -33,6 +33,8 @@ func run() error {
 		return runLike(os.Args[2:])
 	case "list":
 		return runList(os.Args[2:])
+	case "serve":
+		return runServe(os.Args[2:])
 	case "version":
 		fmt.Printf("mimic %s (commit %s, built %s)\n", version, commit, date)
 		return nil
