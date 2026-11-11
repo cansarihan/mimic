@@ -118,6 +118,16 @@ func good(x any) int { v, ok := x.(int); if !ok { return 0 }; return v }
 	}
 }
 
+func TestHardcodedCreds(t *testing.T) {
+	hits := matchSource(t, hardcodedCreds{}, `
+func bad() { apiKey := "sk-abc123secret" ; _ = apiKey }
+func good(k string) { apiKey := k ; _ = apiKey }
+`)
+	if len(hits) != 1 || hits[0].Func != "bad" {
+		t.Fatalf("want 1 finding in bad, got %+v", hits)
+	}
+}
+
 func TestRegistryNotEmpty(t *testing.T) {
 	if len(Registry()) == 0 {
 		t.Fatal("no matchers registered")
