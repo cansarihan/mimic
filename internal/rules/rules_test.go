@@ -128,6 +128,17 @@ func good(k string) { apiKey := k ; _ = apiKey }
 	}
 }
 
+func TestRegexpInLoop(t *testing.T) {
+	hits := matchSource(t, regexpInLoop{}, `
+import "regexp"
+func bad(xs []string) { for _, x := range xs { re := regexp.MustCompile("a+"); _ = re.MatchString(x) } }
+func good(xs []string) { re := regexp.MustCompile("a+"); for _, x := range xs { _ = re.MatchString(x) } }
+`)
+	if len(hits) != 1 || hits[0].Func != "bad" {
+		t.Fatalf("want 1 finding in bad, got %+v", hits)
+	}
+}
+
 func TestRegistryNotEmpty(t *testing.T) {
 	if len(Registry()) == 0 {
 		t.Fatal("no matchers registered")
