@@ -7,12 +7,14 @@ import (
 
 	"github.com/cansarihan/mimic/internal/report"
 	"github.com/cansarihan/mimic/internal/rules"
+	"github.com/cansarihan/mimic/internal/sarif"
 	"github.com/cansarihan/mimic/internal/scan"
 )
 
 func runRules(args []string) error {
 	flags := flag.NewFlagSet("rules", flag.ContinueOnError)
 	asJSON := flags.Bool("json", false, "print JSON instead of a table")
+	sarifOut := flags.Bool("sarif", false, "print a SARIF 2.1.0 document")
 	only := flags.String("rule", "", "only run the named rule")
 	if err := flags.Parse(args); err != nil {
 		return err
@@ -32,6 +34,9 @@ func runRules(args []string) error {
 	report_, err := scan.Rules(dir(flags.Args(), 0), matchers)
 	if err != nil {
 		return err
+	}
+	if *sarifOut {
+		return report.JSON(os.Stdout, sarif.Build(report_, rules.Registry()))
 	}
 	if *asJSON {
 		return report.JSON(os.Stdout, report_)
