@@ -73,3 +73,28 @@ func TestLikeMissingReference(t *testing.T) {
 		t.Fatal("expected an error for a missing reference")
 	}
 }
+
+func TestClustersGroupsClones(t *testing.T) {
+	dir := writeSrc(t, `
+func sumA(xs []int) int { total := 0; for _, x := range xs { total += x }; return total }
+func sumB(ys []int) int { acc := 0; for _, y := range ys { acc += y }; return acc }
+func greet(s string) string { return "hi " + s }
+`)
+	report, err := Clusters(dir, 0.5)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(report.Clusters) != 1 {
+		t.Fatalf("clusters = %d, want 1", len(report.Clusters))
+	}
+	if report.Clusters[0].Size != 2 {
+		t.Errorf("cluster size = %d, want 2 (sumA, sumB)", report.Clusters[0].Size)
+	}
+	names := map[string]bool{}
+	for _, m := range report.Clusters[0].Members {
+		names[m.Func] = true
+	}
+	if !names["sumA"] || !names["sumB"] || names["greet"] {
+		t.Errorf("cluster members wrong: %+v", report.Clusters[0].Members)
+	}
+}
