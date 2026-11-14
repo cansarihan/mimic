@@ -35,6 +35,8 @@ func run() error {
 		return runList(os.Args[2:])
 	case "serve":
 		return runServe(os.Args[2:])
+	case "clusters":
+		return runClusters(os.Args[2:])
 	case "version":
 		fmt.Printf("mimic %s (commit %s, built %s)\n", version, commit, date)
 		return nil
@@ -44,7 +46,7 @@ func run() error {
 }
 
 func usage() error {
-	fmt.Fprintln(os.Stderr, "usage: mimic <rules|like|list|serve|version> [args]")
+	fmt.Fprintln(os.Stderr, "usage: mimic <rules|like|clusters|list|serve|version> [args]")
 	fmt.Fprintln(os.Stderr, "  mimic rules ./pkg")
 	fmt.Fprintln(os.Stderr, "  mimic like ./pkg validateUser")
 	fmt.Fprintln(os.Stderr, "  mimic serve -dir ./pkg -listen 127.0.0.1:8080")
