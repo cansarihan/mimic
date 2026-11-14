@@ -55,3 +55,20 @@ func short(path string) string {
 	}
 	return "…" + path[len(path)-max+1:]
 }
+
+// ClusterTable renders the clone families found in a tree.
+func ClusterTable(w io.Writer, report scan.ClusterReport) {
+	fmt.Fprintf(w, "%s\n%d functions scanned · %d clone cluster(s) at ≥ %.0f%%\n\n",
+		report.Root, report.Functions, len(report.Clusters), report.Threshold*100)
+	if len(report.Clusters) == 0 {
+		fmt.Fprintln(w, "no clone clusters above the threshold")
+		return
+	}
+	for _, c := range report.Clusters {
+		fmt.Fprintf(w, "cluster %d · %d members\n", c.ID, c.Size)
+		for _, m := range c.Members {
+			fmt.Fprintf(w, "  %s  (%s:%d)\n", m.Func, short(m.File), m.Line)
+		}
+		fmt.Fprintln(w)
+	}
+}
