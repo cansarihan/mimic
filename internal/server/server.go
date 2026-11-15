@@ -55,6 +55,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /api/v1/findings", s.guard(s.handleFindings))
 	mux.HandleFunc("GET /api/v1/functions", s.guard(s.handleFunctions))
 	mux.HandleFunc("GET /api/v1/like", s.guard(s.handleLike))
+	mux.HandleFunc("GET /api/v1/clusters", s.guard(s.handleClusters))
 	if s.options.UI {
 		mux.Handle("GET /", uiHandler())
 	}
@@ -150,6 +151,21 @@ func (s *Server) handleLike(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	report, err := scan.Like(s.options.Dir, ref, min)
+	if err != nil {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+		return
+	}
+	writeJSON(w, http.StatusOK, report)
+}
+
+func (s *Server) handleClusters(w http.ResponseWriter, r *http.Request) {
+	min := 0.75
+	if v := r.URL.Query().Get("min"); v != "" {
+		if parsed, err := strconv.ParseFloat(v, 64); err == nil {
+			min = parsed
+		}
+	}
+	report, err := scan.Clusters(s.options.Dir, min)
 	if err != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 		return
