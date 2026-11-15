@@ -16,6 +16,7 @@ function route(page) {
   if (page === "findings") loadFindings();
   if (page === "rules") loadRules();
   if (page === "siblings") loadSiblings();
+  if (page === "clusters") loadClusters();
 }
 
 async function loadOverview() {
@@ -140,12 +141,25 @@ function drawConstellation() {
   ctx.fillText(siblingState.ref, cx, cy + 26);
 }
 
+async function loadClusters() {
+  const min = (parseInt($("cmin").value, 10) / 100).toFixed(2);
+  const rep = await api("/api/v1/clusters?min=" + min);
+  const clusters = rep.clusters || [];
+  $("clusters-count").textContent = clusters.length + " cluster(s)";
+  $("clusters-grid").innerHTML = clusters.map((c) =>
+    '<div class="rule-card"><h3>cluster ' + c.id + ' · ' + c.size + ' members</h3>' +
+    c.members.map((m) => '<p>' + esc(m.func) + ' <span class="muted">' + esc(base(m.file)) + ':' + m.line + '</span></p>').join("") +
+    '</div>').join("") || '<div class="muted">no clone clusters above the threshold</div>';
+}
+
 function init() {
   document.querySelectorAll(".nav").forEach((b) => b.addEventListener("click", () => route(b.dataset.page)));
   $("sev-filter").addEventListener("change", renderFindings);
   $("func-select").addEventListener("change", runSiblings);
   $("min").addEventListener("input", () => { $("min-val").textContent = $("min").value + "%"; });
   $("min").addEventListener("change", runSiblings);
+  $("cmin").addEventListener("input", () => { $("cmin-val").textContent = $("cmin").value + "%"; });
+  $("cmin").addEventListener("change", loadClusters);
   window.addEventListener("resize", () => { if (!$("page-siblings").classList.contains("hidden")) drawConstellation(); });
   loadOverview();
 }

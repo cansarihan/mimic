@@ -21,6 +21,7 @@
       <button class="nav" data-page="findings"><span class="ico">⚑</span> Findings</button>
       <button class="nav" data-page="rules"><span class="ico">▤</span> Rules</button>
       <button class="nav" data-page="siblings"><span class="ico">◐</span> Siblings</button>
+      <button class="nav" data-page="clusters"><span class="ico">⊕</span> Clusters</button>
       <button class="nav" data-page="about"><span class="ico">◇</span> About</button>
     </nav>
     <div class="side-foot" id="side-foot">—</div>
@@ -73,6 +74,14 @@
         <canvas id="constellation"></canvas>
         <ol id="sibling-list" class="mini-list"></ol>
       </div>
+    </section>
+
+    <section class="page hidden" id="page-clusters">
+      <div class="toolbar">
+        <label class="thr">min <input type="range" id="cmin" min="50" max="98" value="75"><span id="cmin-val">75%</span></label>
+        <span id="clusters-count" class="muted"></span>
+      </div>
+      <div id="clusters-grid" class="rule-grid"></div>
     </section>
 
     <section class="page hidden" id="page-about">
