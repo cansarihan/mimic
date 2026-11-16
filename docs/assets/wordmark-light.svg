@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 170" width="760" height="170" fill="none">
+  <g transform="translate(74,85)">
+    <circle cx="-16" cy="0" r="26" fill="none" stroke="#7c3aed" stroke-width="3"/>
+    <circle cx="16" cy="0" r="26" fill="none" stroke="#c026d3" stroke-width="3" opacity="0.85"/>
+    <circle cx="-16" cy="0" r="6" fill="#7c3aed"/>
+    <circle cx="16" cy="0" r="6" fill="#c026d3"/>
+  </g>
+  <text x="150" y="92" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="60" font-weight="700" letter-spacing="4" fill="#1a1333">mimic</text>
+  <text x="153" y="122" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.5" fill="#6b6386">variant analysis for Go</text>
+  <g transform="translate(600,85)" font-family="ui-monospace, Menlo, monospace" font-size="10">
+    <rect x="-6" y="-30" width="104" height="15" rx="3" fill="#7c3aed" opacity="0.12"/>
+    <text x="2" y="-19" fill="#7c3aed">validateUser</text>
+    <rect x="-6" y="-11" width="104" height="15" rx="3" fill="#c026d3" opacity="0.12"/>
+    <text x="2" y="0" fill="#c026d3">validateAdmin 100%</text>
+  </g>
+</svg>
