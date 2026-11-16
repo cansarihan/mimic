@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+  <rect width="1000" height="600" fill="#0e0a1a"/>
+  <!-- sidebar -->
+  <rect width="232" height="600" fill="#120b22"/>
+  <line x1="232" y1="0" x2="232" y2="600" stroke="#271d42"/>
+  <g transform="translate(20,24)">
+    <circle cx="8" cy="8" r="11" fill="none" stroke="#a78bfa" stroke-width="2.6"/>
+    <circle cx="22" cy="8" r="11" fill="none" stroke="#e879f9" stroke-width="2.6" opacity="0.85"/>
+    <text x="44" y="6" font-size="17" letter-spacing="2" fill="#e8e4f0">mimic</text>
+    <text x="44" y="20" font-size="9" letter-spacing="1" fill="#8b82a8">variant analysis</text>
+  </g>
+  <g transform="translate(14,76)" font-size="13">
+    <rect width="204" height="38" rx="8" fill="#a78bfa" opacity="0.16"/>
+    <text x="16" y="24" fill="#a78bfa">◼  Overview</text>
+    <text x="16" y="64" fill="#8b82a8">⚑  Findings</text>
+    <text x="16" y="104" fill="#8b82a8">▤  Rules</text>
+    <text x="16" y="144" fill="#8b82a8">◐  Siblings</text>
+    <text x="16" y="184" fill="#8b82a8">⊕  Clusters</text>
+    <text x="16" y="224" fill="#8b82a8">◇  About</text>
+  </g>
+  <text x="22" y="576" font-size="9" fill="#8b82a8">darwin/arm64 · go1.25</text>
+  <!-- topbar -->
+  <rect x="232" width="768" height="54" fill="#120d24"/>
+  <line x1="232" y1="54" x2="1000" y2="54" stroke="#271d42"/>
+  <text x="258" y="34" font-size="15" letter-spacing="1" fill="#e8e4f0">Overview</text>
+  <text x="976" y="34" text-anchor="end" font-size="11" fill="#8b82a8">./deploy/sample · mimic v0.1.0</text>
+  <!-- tiles -->
+  <g transform="translate(258,78)">
+    <g font-family="ui-monospace, Menlo, monospace">
+      <rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/>
+      <text x="16" y="38" font-size="25" fill="#e8e4f0">8</text><text x="16" y="58" font-size="10" fill="#8b82a8">functions</text>
+      <g transform="translate(146,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#fb7185">6</text><text x="16" y="58" font-size="10" fill="#8b82a8">findings</text></g>
+      <g transform="translate(292,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#e8e4f0">9</text><text x="16" y="58" font-size="10" fill="#8b82a8">rules</text></g>
+      <g transform="translate(438,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#e8e4f0">4</text><text x="16" y="58" font-size="10" fill="#8b82a8">errors</text></g>
+      <g transform="translate(584,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#e8e4f0">2</text><text x="16" y="58" font-size="10" fill="#8b82a8">warnings</text></g>
+    </g>
+  </g>
+  <!-- by-rule bars card -->
+  <g transform="translate(258,176)">
+    <rect width="356" height="380" rx="12" fill="#15102a" stroke="#271d42"/>
+    <text x="16" y="28" font-size="10" letter-spacing="1.5" fill="#8b82a8">FINDINGS BY RULE</text>
+    <line x1="0" y1="42" x2="356" y2="42" stroke="#271d42"/>
+    <g transform="translate(16,64)" font-size="11">
+      <!-- rows -->
+      <g><text y="4" fill="#e8e4f0">math-rand-secret</text><rect x="140" y="-4" width="160" height="8" rx="4" fill="#120d24"/><rect x="140" y="-4" width="160" height="8" rx="4" fill="#a78bfa"/><text x="312" y="4" fill="#8b82a8">1</text></g>
+      <g transform="translate(0,28)"><text y="4" fill="#e8e4f0">sprintf-into-query</text><rect x="140" y="-4" width="160" height="8" rx="4" fill="#120d24"/><rect x="140" y="-4" width="160" height="8" rx="4" fill="#a78bfa"/><text x="312" y="4" fill="#8b82a8">1</text></g>
+      <g transform="translate(0,56)"><text y="4" fill="#e8e4f0">lock-without-unlock</text><rect x="140" y="-4" width="160" height="8" rx="4" fill="#120d24"/><rect x="140" y="-4" width="160" height="8" rx="4" fill="#a78bfa"/><text x="312" y="4" fill="#8b82a8">1</text></g>
+      <g transform="translate(0,84)"><text y="4" fill="#e8e4f0">discarded-append</text><rect x="140" y="-4" width="160" height="8" rx="4" fill="#120d24"/><rect x="140" y="-4" width="160" height="8" rx="4" fill="#a78bfa"/><text x="312" y="4" fill="#8b82a8">1</text></g>
+      <g transform="translate(0,112)"><text y="4" fill="#e8e4f0">defer-in-loop</text><rect x="140" y="-4" width="160" height="8" rx="4" fill="#120d24"/><rect x="140" y="-4" width="160" height="8" rx="4" fill="#e879f9"/><text x="312" y="4" fill="#8b82a8">1</text></g>
+      <g transform="translate(0,140)"><text y="4" fill="#e8e4f0">swallowed-error</text><rect x="140" y="-4" width="160" height="8" rx="4" fill="#120d24"/><rect x="140" y="-4" width="160" height="8" rx="4" fill="#e879f9"/><text x="312" y="4" fill="#8b82a8">1</text></g>
+    </g>
+  </g>
+  <!-- recent findings card -->
+  <g transform="translate(630,176)">
+    <rect width="344" height="380" rx="12" fill="#15102a" stroke="#271d42"/>
+    <text x="16" y="28" font-size="10" letter-spacing="1.5" fill="#8b82a8">RECENT FINDINGS</text>
+    <line x1="0" y1="42" x2="344" y2="42" stroke="#271d42"/>
+    <g transform="translate(16,64)" font-size="11.5" fill="#e8e4f0">
+      <g><rect x="-2" y="-11" width="42" height="15" rx="4" fill="#fb7185" opacity="0.14"/><text y="0" x="4" font-size="9" fill="#fb7185">ERROR</text><text x="50" y="0">generateToken — math-rand-secret</text></g>
+      <g transform="translate(0,30)"><rect x="-2" y="-11" width="42" height="15" rx="4" fill="#fbbf24" opacity="0.14"/><text y="0" x="4" font-size="9" fill="#fbbf24">WARN</text><text x="50" y="0">readAll — defer-in-loop</text></g>
+      <g transform="translate(0,60)"><rect x="-2" y="-11" width="42" height="15" rx="4" fill="#fb7185" opacity="0.14"/><text y="0" x="4" font-size="9" fill="#fb7185">ERROR</text><text x="50" y="0">lookup — sprintf-into-query</text></g>
+      <g transform="translate(0,90)"><rect x="-2" y="-11" width="42" height="15" rx="4" fill="#fbbf24" opacity="0.14"/><text y="0" x="4" font-size="9" fill="#fbbf24">WARN</text><text x="50" y="0">save — swallowed-error</text></g>
+      <g transform="translate(0,120)"><rect x="-2" y="-11" width="42" height="15" rx="4" fill="#fb7185" opacity="0.14"/><text y="0" x="4" font-size="9" fill="#fb7185">ERROR</text><text x="50" y="0">(*counter).bump — lock-without-unlock</text></g>
+      <g transform="translate(0,150)"><rect x="-2" y="-11" width="42" height="15" rx="4" fill="#fb7185" opacity="0.14"/><text y="0" x="4" font-size="9" fill="#fb7185">ERROR</text><text x="50" y="0">collect — discarded-append</text></g>
+    </g>
+  </g>
+</svg>
