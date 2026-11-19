@@ -171,6 +171,18 @@ func bad() { os.Exit(1) }
 	}
 }
 
+func TestErrorStringStyle(t *testing.T) {
+	hits := matchSource(t, errorStringStyle{}, `
+import ("errors"; "fmt")
+func bad() error { return errors.New("Something failed.") }
+func good() error { return fmt.Errorf("read %s: %w", "x", errors.New("eof")) }
+func acronym() error { return errors.New("HTTP request failed") }
+`)
+	if len(hits) != 1 || hits[0].Func != "bad" {
+		t.Fatalf("want 1 finding in bad, got %+v", hits)
+	}
+}
+
 func TestRegistryNotEmpty(t *testing.T) {
 	if len(Registry()) == 0 {
 		t.Fatal("no matchers registered")
