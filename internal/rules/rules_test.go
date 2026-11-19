@@ -139,6 +139,17 @@ func good(xs []string) { re := regexp.MustCompile("a+"); for _, x := range xs { 
 	}
 }
 
+func TestHTTPDefaultClient(t *testing.T) {
+	hits := matchSource(t, httpDefaultClient{}, `
+import ("net/http"; "time")
+func bad() { http.Get("https://x") }
+func good() { c := &http.Client{Timeout: time.Second}; c.Get("https://x") }
+`)
+	if len(hits) != 1 || hits[0].Func != "bad" {
+		t.Fatalf("want 1 finding in bad, got %+v", hits)
+	}
+}
+
 func TestRegistryNotEmpty(t *testing.T) {
 	if len(Registry()) == 0 {
 		t.Fatal("no matchers registered")
