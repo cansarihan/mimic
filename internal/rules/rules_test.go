@@ -150,6 +150,17 @@ func good() { c := &http.Client{Timeout: time.Second}; c.Get("https://x") }
 	}
 }
 
+func TestTimeAfterInLoop(t *testing.T) {
+	hits := matchSource(t, timeAfterInLoop{}, `
+import "time"
+func bad(ch chan int) { for { select { case <-ch: case <-time.After(time.Second): return } } }
+func good(ch chan int) { t := time.NewTimer(time.Second); for { select { case <-ch: case <-t.C: return } } }
+`)
+	if len(hits) != 1 || hits[0].Func != "bad" {
+		t.Fatalf("want 1 finding in bad, got %+v", hits)
+	}
+}
+
 func TestRegistryNotEmpty(t *testing.T) {
 	if len(Registry()) == 0 {
 		t.Fatal("no matchers registered")
