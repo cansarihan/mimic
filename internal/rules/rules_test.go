@@ -161,6 +161,16 @@ func good(ch chan int) { t := time.NewTimer(time.Second); for { select { case <-
 	}
 }
 
+func TestOSExitInLibrary(t *testing.T) {
+	hits := matchSource(t, osExitInLibrary{}, `
+import "os"
+func bad() { os.Exit(1) }
+`)
+	if len(hits) != 1 || hits[0].Func != "bad" {
+		t.Fatalf("want 1 finding in bad (package p), got %+v", hits)
+	}
+}
+
 func TestRegistryNotEmpty(t *testing.T) {
 	if len(Registry()) == 0 {
 		t.Fatal("no matchers registered")
