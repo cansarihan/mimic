@@ -24,13 +24,14 @@ a query built with `fmt.Sprintf`, a mutex locked but never unlocked.
 
 ```console
 $ mimic rules ./pkg
-8 functions · 6 finding(s)
+14 functions · 13 finding(s)
 
 SEVERITY  RULE                 LOCATION         FUNC             MESSAGE
 error     math-rand-secret     auth.go:13       generateToken    builds a secret with math/rand's Intn; use crypto/rand
 warning   defer-in-loop        handlers.go:20   readAll          defer inside a loop; released only when readAll returns
 error     sprintf-into-query   handlers.go:29   lookup           Query receives a fmt.Sprintf-built statement
 error     lock-without-unlock  sync.go:12       (*counter).bump  bump calls Lock but never Unlock
+…
 ```
 
 **Variants** rank the structural siblings of a reference function — a renamed
@@ -39,7 +40,7 @@ copy scores ~100%, an edited one lower but still clearly.
 ```console
 $ mimic like ./pkg validateUser
 reference validateUser
-8 functions scanned · 1 match(es) at ≥ 60%
+14 functions scanned · 1 match(es) at ≥ 60%
 
 SIMILARITY  LOCATION       FUNC
 100%        auth.go:33     validateAdmin
@@ -90,12 +91,16 @@ scanning and any tool that reads SARIF.
 $ mimic list
 defer-in-loop          a defer inside a loop runs only when the function returns
 discarded-append       the result of append is assigned to _; the element is lost
+error-string-style     an error string starts with a capital or ends with punctuation
 hardcoded-credentials  a secret-named variable is assigned a string literal
+http-default-client    http.Get/Post use the default client, which has no timeout
 lock-without-unlock    a mutex is locked but never unlocked in the same function
 math-rand-secret       a secret-sounding function draws from math/rand
+os-exit-in-library     os.Exit outside package main skips deferred cleanup
 regexp-in-loop         a regexp is compiled inside a loop
 sprintf-into-query     a SQL statement built with fmt.Sprintf and passed to Query/Exec
 swallowed-error        an empty `if err != nil` block drops the failure
+time-after-in-loop     time.After inside a loop leaks a timer per iteration
 unchecked-type-assert  a single-value type assertion panics on a mismatch
 ```
 

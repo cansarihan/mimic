@@ -5,7 +5,7 @@
   <text x="450" y="23" text-anchor="middle" font-size="12" fill="#8b82a8">mimic rules ./pkg</text>
   <g font-size="13">
     <text x="22" y="66" fill="#a78bfa">$ mimic rules ./pkg</text>
-    <text x="22" y="90" fill="#8b82a8">8 functions · 6 finding(s)</text>
+    <text x="22" y="90" fill="#8b82a8">14 functions · 13 finding(s)</text>
     <text x="22" y="120" fill="#6b6386">SEVERITY  RULE                 LOCATION         FUNC             MESSAGE</text>
     <text x="22" y="142" fill="#fb7185">error     math-rand-secret     auth.go:13       generateToken    <tspan fill="#c9c2dd">builds a secret with math/rand</tspan></text>
     <text x="22" y="162" fill="#fbbf24">warning   defer-in-loop        handlers.go:20   readAll          <tspan fill="#c9c2dd">defer inside a loop leaks per iteration</tspan></text>

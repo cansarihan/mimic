@@ -28,11 +28,11 @@
   <g transform="translate(258,78)">
     <g font-family="ui-monospace, Menlo, monospace">
       <rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/>
-      <text x="16" y="38" font-size="25" fill="#e8e4f0">8</text><text x="16" y="58" font-size="10" fill="#8b82a8">functions</text>
-      <g transform="translate(146,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#fb7185">6</text><text x="16" y="58" font-size="10" fill="#8b82a8">findings</text></g>
-      <g transform="translate(292,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#e8e4f0">9</text><text x="16" y="58" font-size="10" fill="#8b82a8">rules</text></g>
-      <g transform="translate(438,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#e8e4f0">4</text><text x="16" y="58" font-size="10" fill="#8b82a8">errors</text></g>
-      <g transform="translate(584,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#e8e4f0">2</text><text x="16" y="58" font-size="10" fill="#8b82a8">warnings</text></g>
+      <text x="16" y="38" font-size="25" fill="#e8e4f0">14</text><text x="16" y="58" font-size="10" fill="#8b82a8">functions</text>
+      <g transform="translate(146,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#fb7185">13</text><text x="16" y="58" font-size="10" fill="#8b82a8">findings</text></g>
+      <g transform="translate(292,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#e8e4f0">13</text><text x="16" y="58" font-size="10" fill="#8b82a8">rules</text></g>
+      <g transform="translate(438,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#e8e4f0">5</text><text x="16" y="58" font-size="10" fill="#8b82a8">errors</text></g>
+      <g transform="translate(584,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#e8e4f0">7</text><text x="16" y="58" font-size="10" fill="#8b82a8">warnings</text></g>
     </g>
   </g>
   <!-- by-rule bars card -->
