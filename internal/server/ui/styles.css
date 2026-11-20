@@ -63,6 +63,7 @@ nav { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
 .mini-list li .sev { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; padding: 1px 6px; border-radius: 4px; margin-right: 8px; }
 .sev.error { color: var(--err); background: rgba(251,113,133,.14); }
 .sev.warning { color: var(--amber); background: rgba(251,191,36,.14); }
+.sev.info { color: var(--teal); background: rgba(45,212,191,.12); }
 .muted { color: var(--muted); font-size: 11px; }
 
 /* findings table */
