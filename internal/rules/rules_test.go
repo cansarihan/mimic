@@ -188,3 +188,20 @@ func TestRegistryNotEmpty(t *testing.T) {
 		t.Fatal("no matchers registered")
 	}
 }
+
+func TestRegistrySortedAndUnique(t *testing.T) {
+	seen := map[string]bool{}
+	reg := Registry()
+	for i, m := range reg {
+		if seen[m.Name()] {
+			t.Errorf("duplicate rule name %q", m.Name())
+		}
+		seen[m.Name()] = true
+		if m.Describe() == "" {
+			t.Errorf("rule %q has no description", m.Name())
+		}
+		if i > 0 && reg[i-1].Name() > m.Name() {
+			t.Errorf("registry not sorted: %q before %q", reg[i-1].Name(), m.Name())
+		}
+	}
+}

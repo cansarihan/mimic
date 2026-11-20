@@ -7,6 +7,7 @@ package rules
 
 import (
 	"go/ast"
+	"sort"
 
 	"github.com/cansarihan/mimic/internal/srcwalk"
 )
@@ -32,10 +33,12 @@ var registry []Matcher
 
 func register(m Matcher) { registry = append(registry, m) }
 
-// Registry returns every built-in matcher.
+// Registry returns every built-in matcher, sorted by name so the catalogue and
+// the SARIF rule list are stable from run to run.
 func Registry() []Matcher {
 	out := make([]Matcher, len(registry))
 	copy(out, registry)
+	sort.Slice(out, func(i, j int) bool { return out[i].Name() < out[j].Name() })
 	return out
 }
 
