@@ -93,3 +93,28 @@ func TestLikeRequiresRef(t *testing.T) {
 		t.Fatalf("missing ref = %d, want 400", res.StatusCode)
 	}
 }
+
+func TestClustersEndpoint(t *testing.T) {
+	srv := httptest.NewServer(testHandler(""))
+	defer srv.Close()
+	res, err := http.Get(srv.URL + "/api/v1/clusters?min=0.9")
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() { _ = res.Body.Close() }()
+	var report scan.ClusterReport
+	if err := json.NewDecoder(res.Body).Decode(&report); err != nil {
+		t.Fatal(err)
+	}
+	found := false
+	for _, c := range report.Clusters {
+		for _, m := range c.Members {
+			if m.Func == "validateAdmin" {
+				found = true
+			}
+		}
+	}
+	if !found {
+		t.Errorf("expected the validate* pair in a cluster, got %+v", report.Clusters)
+	}
+}
