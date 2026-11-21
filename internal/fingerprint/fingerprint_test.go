@@ -40,3 +40,20 @@ func TestEditedSiblingIsSimilarNotIdentical(t *testing.T) {
 		t.Errorf("edited sibling similarity = %v, want partial", s)
 	}
 }
+
+func TestSortedTokensUnique(t *testing.T) {
+	p := New(parseFunc(t, `func f(xs []int) int { total := 0; for _, x := range xs { total += x }; return total }`))
+	tokens := p.SortedTokens()
+	for i := 1; i < len(tokens); i++ {
+		if tokens[i-1] >= tokens[i] {
+			t.Fatalf("tokens not sorted and unique: %v", tokens)
+		}
+	}
+	has := map[string]bool{}
+	for _, tk := range tokens {
+		has[tk] = true
+	}
+	if !has["range"] || !has["return"] {
+		t.Errorf("expected range and return tokens, got %v", tokens)
+	}
+}
