@@ -51,3 +51,16 @@ func TestWalkSkipsVendor(t *testing.T) {
 		}
 	}
 }
+
+func TestWalkSkipsUnparseableFiles(t *testing.T) {
+	dir := t.TempDir()
+	_ = os.WriteFile(filepath.Join(dir, "broken.go"), []byte("package p\nfunc {"), 0o600)
+	_ = os.WriteFile(filepath.Join(dir, "ok.go"), []byte("package p\nfunc Fine() {}\n"), 0o600)
+	funcs, err := Walk(dir)
+	if err != nil {
+		t.Fatalf("a broken file should not fail the walk: %v", err)
+	}
+	if len(funcs) != 1 || funcs[0].Name != "Fine" {
+		t.Errorf("want only Fine, got %+v", funcs)
+	}
+}
