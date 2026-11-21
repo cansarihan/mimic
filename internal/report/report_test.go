@@ -30,3 +30,20 @@ func TestLikeTableEmpty(t *testing.T) {
 		t.Errorf("empty like table should say so:\n%s", buf.String())
 	}
 }
+
+func TestClusterTable(t *testing.T) {
+	var buf bytes.Buffer
+	ClusterTable(&buf, scan.ClusterReport{
+		Root: "./pkg", Functions: 4, Threshold: 0.8,
+		Clusters: []scan.Cluster{{ID: 1, Size: 2, Members: []scan.ClusterMember{
+			{Func: "validateUser", File: "auth.go", Line: 20},
+			{Func: "validateAdmin", File: "auth.go", Line: 33},
+		}}},
+	})
+	out := buf.String()
+	for _, want := range []string{"1 clone cluster", "cluster 1 · 2 members", "validateAdmin", "auth.go:33"} {
+		if !strings.Contains(out, want) {
+			t.Errorf("missing %q\n%s", want, out)
+		}
+	}
+}
