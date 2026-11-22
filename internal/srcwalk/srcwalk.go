@@ -24,7 +24,8 @@ type Func struct {
 }
 
 // Walk parses every non-vendored Go file under root and returns its functions.
-// Test files are included; a function with no body (an assembly stub) is skipped
+// Generated files (marked `Code generated ... DO NOT EDIT.`) are skipped. Test
+// files are included; a function with no body (an assembly stub) is skipped
 // because there is nothing to analyze.
 func Walk(root string) ([]Func, error) {
 	fset := token.NewFileSet()
@@ -43,9 +44,12 @@ func Walk(root string) ([]Func, error) {
 		if !strings.HasSuffix(path, ".go") {
 			return nil
 		}
-		file, parseErr := parser.ParseFile(fset, path, nil, parser.SkipObjectResolution)
+		file, parseErr := parser.ParseFile(fset, path, nil, parser.SkipObjectResolution|parser.ParseComments)
 		if parseErr != nil {
 			return nil // a file that does not parse is skipped, not fatal
+		}
+		if ast.IsGenerated(file) {
+			return nil // generated code is not where variants are fixed
 		}
 		pkg := file.Name.Name
 		for _, decl := range file.Decls {
