@@ -98,3 +98,15 @@ func greet(s string) string { return "hi " + s }
 		t.Errorf("cluster members wrong: %+v", report.Clusters[0].Members)
 	}
 }
+
+func TestAtOrAbove(t *testing.T) {
+	r := RuleReport{Findings: []rules.Finding{
+		{Severity: "info"}, {Severity: "warning"}, {Severity: "error"}, {Severity: "error"},
+	}}
+	cases := map[string]int{"error": 2, "warning": 3, "info": 4, "": 0, "bogus": 0}
+	for min, want := range cases {
+		if got := r.AtOrAbove(min); got != want {
+			t.Errorf("AtOrAbove(%q) = %d, want %d", min, got, want)
+		}
+	}
+}
