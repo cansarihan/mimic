@@ -66,8 +66,13 @@ function renderFindings() {
 
 async function loadRules() {
   const rules = await api("/api/v1/rules");
-  $("rules-cards").innerHTML = rules.map((r) =>
-    '<div class="rule-card"><h3>' + esc(r.name) + '</h3><p>' + esc(r.describe) + '</p></div>').join("");
+  if (!findingsCache) findingsCache = await api("/api/v1/findings");
+  const counts = findingsCache.counts || {};
+  $("rules-cards").innerHTML = rules.map((r) => {
+    const n = counts[r.name] || 0;
+    return '<div class="rule-card"><h3>' + esc(r.name) +
+      '<span class="count' + (n ? ' hit' : '') + '">' + n + '</span></h3><p>' + esc(r.describe) + '</p></div>';
+  }).join("");
 }
 
 let siblingState = { ref: "", matches: [] };
