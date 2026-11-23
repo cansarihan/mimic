@@ -40,6 +40,8 @@ async function loadOverview() {
     Math.round((counts[rule] / max) * 100) + '%"></div></div><span>' + counts[rule] + '</span></div>').join("") ||
     '<div class="muted" style="padding:6px 2px">no findings</div>';
 
+  api("/api/v1/clusters").then((c) => { $("t-clusters").textContent = (c.clusters || []).length; });
+
   const recent = $("recent");
   recent.innerHTML = (rep.findings || []).slice(0, 8).map((f) =>
     '<li><span class="sev ' + f.severity + '">' + f.severity + '</span>' + esc(f.func) + ' — ' + esc(f.rule) + '</li>').join("") ||
