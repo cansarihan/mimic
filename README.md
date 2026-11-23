@@ -83,7 +83,8 @@ $ mimic rules -sarif ./pkg > mimic.sarif
 ```
 
 The rules export as a SARIF 2.1.0 document, so findings flow into GitHub code
-scanning and any tool that reads SARIF.
+scanning and any tool that reads SARIF. In CI, `-fail-on error` turns the scan
+into a gate: the command exits non-zero when any error-level finding remains.
 
 ## Rules
 
@@ -111,6 +112,7 @@ $ mimic rules ./pkg          # run the rules over a tree
     -json            print JSON
     -sarif           print a SARIF 2.1.0 document
     -rule <name>     only run one rule
+    -fail-on <sev>   exit non-zero on a finding at or above error|warning|info
 $ mimic like ./pkg Func      # rank a function's structural siblings
     -min <0..1>      minimum similarity (default 0.6)
 $ mimic clusters ./pkg       # group the tree into clone families
