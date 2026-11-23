@@ -24,16 +24,14 @@
   <line x1="232" y1="54" x2="1000" y2="54" stroke="#271d42"/>
   <text x="258" y="34" font-size="15" letter-spacing="1" fill="#e8e4f0">Overview</text>
   <text x="976" y="34" text-anchor="end" font-size="11" fill="#8b82a8">./deploy/sample · mimic v0.1.0</text>
-  <!-- tiles -->
+    <!-- tiles -->
   <g transform="translate(258,78)">
-    <g font-family="ui-monospace, Menlo, monospace">
-      <rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/>
-      <text x="16" y="38" font-size="25" fill="#e8e4f0">14</text><text x="16" y="58" font-size="10" fill="#8b82a8">functions</text>
-      <g transform="translate(146,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#fb7185">13</text><text x="16" y="58" font-size="10" fill="#8b82a8">findings</text></g>
-      <g transform="translate(292,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#e8e4f0">13</text><text x="16" y="58" font-size="10" fill="#8b82a8">rules</text></g>
-      <g transform="translate(438,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#e8e4f0">5</text><text x="16" y="58" font-size="10" fill="#8b82a8">errors</text></g>
-      <g transform="translate(584,0)"><rect width="134" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="16" y="38" font-size="25" fill="#e8e4f0">7</text><text x="16" y="58" font-size="10" fill="#8b82a8">warnings</text></g>
-    </g>
+    <g transform="translate(0,0)"><rect width="110" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="14" y="38" font-size="24" fill="#e8e4f0">14</text><text x="14" y="58" font-size="10" fill="#8b82a8">functions</text></g>
+    <g transform="translate(121,0)"><rect width="110" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="14" y="38" font-size="24" fill="#fb7185">13</text><text x="14" y="58" font-size="10" fill="#8b82a8">findings</text></g>
+    <g transform="translate(242,0)"><rect width="110" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="14" y="38" font-size="24" fill="#e8e4f0">13</text><text x="14" y="58" font-size="10" fill="#8b82a8">rules</text></g>
+    <g transform="translate(363,0)"><rect width="110" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="14" y="38" font-size="24" fill="#e8e4f0">5</text><text x="14" y="58" font-size="10" fill="#8b82a8">errors</text></g>
+    <g transform="translate(484,0)"><rect width="110" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="14" y="38" font-size="24" fill="#e8e4f0">7</text><text x="14" y="58" font-size="10" fill="#8b82a8">warnings</text></g>
+    <g transform="translate(605,0)"><rect width="110" height="74" rx="12" fill="#15102a" stroke="#271d42"/><text x="14" y="38" font-size="24" fill="#e879f9">1</text><text x="14" y="58" font-size="10" fill="#8b82a8">clone clusters</text></g>
   </g>
   <!-- by-rule bars card -->
   <g transform="translate(258,176)">
