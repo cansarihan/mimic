@@ -38,7 +38,7 @@ func (e errorStringStyle) Match(fn srcwalk.Func) []Finding {
 		if !ok {
 			return true
 		}
-		if !(pkg.Name == "errors" && sel.Sel.Name == "New") && !(pkg.Name == "fmt" && sel.Sel.Name == "Errorf") {
+		if !isErrorConstructor(pkg.Name, sel.Sel.Name) {
 			return true
 		}
 		lit, ok := call.Args[0].(*ast.BasicLit)
@@ -61,6 +61,10 @@ func (e errorStringStyle) Match(fn srcwalk.Func) []Finding {
 		return true
 	})
 	return out
+}
+
+func isErrorConstructor(pkg, name string) bool {
+	return (pkg == "errors" && name == "New") || (pkg == "fmt" && name == "Errorf")
 }
 
 // startsWithAcronym allows messages that open with an all-caps word such as
